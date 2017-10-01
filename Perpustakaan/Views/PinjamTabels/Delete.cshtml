@@ -1,0 +1,48 @@
+﻿@model Perpustakaan.Models.PinjamTabel
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>PinjamTabel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.WaktuPinjam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WaktuPinjam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WaktuKembali)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WaktuKembali)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BukuTabel.NamaPengarang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BukuTabel.NamaPengarang)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,42 @@
+﻿@model Perpustakaan.Models.BukuTabel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>BukuTabel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NamaPengarang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NamaPengarang)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JudulBuku)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JudulBuku)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tersedia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tersedia)
+        </dd>
+
+    </dl>
+</div>
+<p>
+   <!-- @Html.ActionLink("Edit", "Edit", new { id = Model.ISBN }) | -->
+    @Html.ActionLink("Back to List", "Index")
+</p>

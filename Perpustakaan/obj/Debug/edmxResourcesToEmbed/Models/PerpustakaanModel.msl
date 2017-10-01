@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PerpustakaanDBModelStoreContainer" CdmEntityContainer="PerpustakaanDBEntities">
+    <EntitySetMapping Name="BukuTabel">
+      <EntityTypeMapping TypeName="PerpustakaanDBModel.BukuTabel">
+        <MappingFragment StoreEntitySet="BukuTabel">
+          <ScalarProperty Name="ISBN" ColumnName="ISBN" />
+          <ScalarProperty Name="NamaPengarang" ColumnName="NamaPengarang" />
+          <ScalarProperty Name="JudulBuku" ColumnName="JudulBuku" />
+          <ScalarProperty Name="Tersedia" ColumnName="Tersedia" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PinjamTabel">
+      <EntityTypeMapping TypeName="PerpustakaanDBModel.PinjamTabel">
+        <MappingFragment StoreEntitySet="PinjamTabel">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="WaktuPinjam" ColumnName="WaktuPinjam" />
+          <ScalarProperty Name="WaktuKembali" ColumnName="WaktuKembali" />
+          <ScalarProperty Name="ISBN" ColumnName="ISBN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

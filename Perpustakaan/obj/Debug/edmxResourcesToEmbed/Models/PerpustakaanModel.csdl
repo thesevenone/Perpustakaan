@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PerpustakaanDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="BukuTabel">
+    <Key>
+      <PropertyRef Name="ISBN" />
+    </Key>
+    <Property Name="ISBN" Type="Int32" Nullable="false" />
+    <Property Name="NamaPengarang" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="JudulBuku" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Tersedia" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="PinjamTabel" Relationship="Self.FK_PinjamTabel_ToBukuTabel" FromRole="BukuTabel" ToRole="PinjamTabel" />
+  </EntityType>
+  <EntityType Name="PinjamTabel">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="WaktuPinjam" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="WaktuKembali" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ISBN" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="BukuTabel" Relationship="Self.FK_PinjamTabel_ToBukuTabel" FromRole="PinjamTabel" ToRole="BukuTabel" />
+  </EntityType>
+  <Association Name="FK_PinjamTabel_ToBukuTabel">
+    <End Role="BukuTabel" Type="Self.BukuTabel" Multiplicity="1" />
+    <End Role="PinjamTabel" Type="Self.PinjamTabel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BukuTabel">
+        <PropertyRef Name="ISBN" />
+      </Principal>
+      <Dependent Role="PinjamTabel">
+        <PropertyRef Name="ISBN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PerpustakaanDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="BukuTabel" EntityType="Self.BukuTabel" />
+    <EntitySet Name="PinjamTabel" EntityType="Self.PinjamTabel" />
+    <AssociationSet Name="FK_PinjamTabel_ToBukuTabel" Association="Self.FK_PinjamTabel_ToBukuTabel">
+      <End Role="BukuTabel" EntitySet="BukuTabel" />
+      <End Role="PinjamTabel" EntitySet="PinjamTabel" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

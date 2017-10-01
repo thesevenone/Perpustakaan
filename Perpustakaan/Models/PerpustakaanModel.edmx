@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PerpustakaanDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BukuTabel">
+          <Key>
+            <PropertyRef Name="ISBN" />
+          </Key>
+          <Property Name="ISBN" Type="int" Nullable="false" />
+          <Property Name="NamaPengarang" Type="varchar" MaxLength="50" />
+          <Property Name="JudulBuku" Type="varchar" MaxLength="50" />
+          <Property Name="Tersedia" Type="nchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="PinjamTabel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="WaktuPinjam" Type="varchar" MaxLength="50" />
+          <Property Name="WaktuKembali" Type="varchar" MaxLength="50" />
+          <Property Name="ISBN" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_PinjamTabel_ToBukuTabel">
+          <End Role="BukuTabel" Type="Self.BukuTabel" Multiplicity="1" />
+          <End Role="PinjamTabel" Type="Self.PinjamTabel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BukuTabel">
+              <PropertyRef Name="ISBN" />
+            </Principal>
+            <Dependent Role="PinjamTabel">
+              <PropertyRef Name="ISBN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PerpustakaanDBModelStoreContainer">
+          <EntitySet Name="BukuTabel" EntityType="Self.BukuTabel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PinjamTabel" EntityType="Self.PinjamTabel" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_PinjamTabel_ToBukuTabel" Association="Self.FK_PinjamTabel_ToBukuTabel">
+            <End Role="BukuTabel" EntitySet="BukuTabel" />
+            <End Role="PinjamTabel" EntitySet="PinjamTabel" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PerpustakaanDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BukuTabel">
+          <Key>
+            <PropertyRef Name="ISBN" />
+          </Key>
+          <Property Name="ISBN" Type="Int32" Nullable="false" />
+          <Property Name="NamaPengarang" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="JudulBuku" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Tersedia" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="PinjamTabel" Relationship="Self.FK_PinjamTabel_ToBukuTabel" FromRole="BukuTabel" ToRole="PinjamTabel" />
+        </EntityType>
+        <EntityType Name="PinjamTabel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="WaktuPinjam" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="WaktuKembali" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ISBN" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BukuTabel" Relationship="Self.FK_PinjamTabel_ToBukuTabel" FromRole="PinjamTabel" ToRole="BukuTabel" />
+        </EntityType>
+        <Association Name="FK_PinjamTabel_ToBukuTabel">
+          <End Role="BukuTabel" Type="Self.BukuTabel" Multiplicity="1" />
+          <End Role="PinjamTabel" Type="Self.PinjamTabel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BukuTabel">
+              <PropertyRef Name="ISBN" />
+            </Principal>
+            <Dependent Role="PinjamTabel">
+              <PropertyRef Name="ISBN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PerpustakaanDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BukuTabel" EntityType="Self.BukuTabel" />
+          <EntitySet Name="PinjamTabel" EntityType="Self.PinjamTabel" />
+          <AssociationSet Name="FK_PinjamTabel_ToBukuTabel" Association="Self.FK_PinjamTabel_ToBukuTabel">
+            <End Role="BukuTabel" EntitySet="BukuTabel" />
+            <End Role="PinjamTabel" EntitySet="PinjamTabel" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PerpustakaanDBModelStoreContainer" CdmEntityContainer="PerpustakaanDBEntities">
+          <EntitySetMapping Name="BukuTabel">
+            <EntityTypeMapping TypeName="PerpustakaanDBModel.BukuTabel">
+              <MappingFragment StoreEntitySet="BukuTabel">
+                <ScalarProperty Name="ISBN" ColumnName="ISBN" />
+                <ScalarProperty Name="NamaPengarang" ColumnName="NamaPengarang" />
+                <ScalarProperty Name="JudulBuku" ColumnName="JudulBuku" />
+                <ScalarProperty Name="Tersedia" ColumnName="Tersedia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PinjamTabel">
+            <EntityTypeMapping TypeName="PerpustakaanDBModel.PinjamTabel">
+              <MappingFragment StoreEntitySet="PinjamTabel">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="WaktuPinjam" ColumnName="WaktuPinjam" />
+                <ScalarProperty Name="WaktuKembali" ColumnName="WaktuKembali" />
+                <ScalarProperty Name="ISBN" ColumnName="ISBN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
